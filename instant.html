@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17191d">
+  <meta name="description" content="Build Minecraft Java Edition command-block stacks with command-block minecart placement commands.">
+  <title>Java 26.3 Fast Command Assembler</title>
+  <link rel="icon" href="./assets/favicon.png?v=20261027e" type="image/png" sizes="300x300">
+  <link rel="stylesheet" href="./styles.css?v=20261027k">
+  <script src="./app.js?v=20261025f" defer></script>
+</head>
+<body data-mode="fast">
+  <header class="site-header">
+    <div class="brand-line">
+      <img class="brand-mark" src="./assets/commandsss.png" alt="" aria-hidden="true">
+      <h1>Java 26.3 Fast Command Assembler</h1>
+    </div>
+    <nav class="mode-nav" aria-label="Assembler mode">
+      <a class="mode-link" href="./index.html?v=20261027k">Slow Assemble</a>
+      <a class="mode-link is-active" href="./instant.html?v=20261027k" aria-current="page">Fast Assemble</a>
+    </nav>
+  </header>
+
+  <main class="workbench">
+    <section class="panel input-panel" aria-labelledby="input-title">
+      <div class="panel-heading">
+        <span class="eyebrow">BUILD YOUR STACK</span>
+        <h2 id="input-title">Input</h2>
+      </div>
+
+      <div class="position-field">
+        <label for="position">Command block position</label>
+        <input id="position" name="position" type="text" autocomplete="off" spellcheck="false" placeholder="eg. ~ ~ ~" aria-describedby="position-help">
+        <small id="position-help" class="field-help">Enter where this block should be placed, e.g. <code>~ ~ ~</code>.</small>
+      </div>
+
+      <hr class="rule">
+
+      <form id="command-form" autocomplete="off">
+        <fieldset class="choice-group">
+          <legend>Command Block Options</legend>
+
+          <div class="segmented-row" role="group" aria-label="Command block type">
+            <input type="radio" id="type-impulse" name="command_type" value="impulse" checked>
+            <label for="type-impulse">Impulse</label>
+            <input type="radio" id="type-chain" name="command_type" value="chain">
+            <label for="type-chain">Chain</label>
+            <input type="radio" id="type-repeating" name="command_type" value="repeating">
+            <label for="type-repeating">Repeat</label>
+          </div>
+
+          <div class="segmented-row two-up" role="group" aria-label="Conditional mode">
+            <input type="radio" id="unconditional" name="conditional" value="false" checked>
+            <label for="unconditional">Unconditional</label>
+            <input type="radio" id="conditional" name="conditional" value="true">
+            <label for="conditional">Conditional</label>
+          </div>
+
+          <div class="segmented-row two-up" role="group" aria-label="Activation mode">
+            <input type="radio" id="needs-redstone" name="always_active" value="false" checked>
+            <label for="needs-redstone">Needs Redstone</label>
+            <input type="radio" id="always-active" name="always_active" value="true">
+            <label for="always-active">Always Active</label>
+          </div>
+        </fieldset>
+
+        <div class="select-field">
+          <label for="direction">Command Block Facing Direction</label>
+          <select id="direction" name="direction">
+            <option value="north">North</option>
+            <option value="east">East</option>
+            <option value="south">South</option>
+            <option value="west">West</option>
+            <option value="up" selected>Up</option>
+            <option value="down">Down</option>
+          </select>
+        </div>
+
+        <div class="command-field">
+          <label for="command">Command</label>
+          <textarea id="command" name="command" rows="5" spellcheck="false" placeholder="Enter Minecraft command…" aria-describedby="command-help"></textarea>
+          <small id="command-help" class="field-help">One command per block. A leading <code>/</code> is okay. Add it to the stack to clear this box and enter the next command.</small>
+        </div>
+
+        <div class="form-actions">
+          <button class="button button-primary" id="add-block" type="button">Add Another Command Block</button>
+          <button class="button button-quiet" id="clear-stack" type="button">Clear stack</button>
+        </div>
+      </form>
+
+      <div class="stack-list-wrap" id="stack-list-wrap" hidden>
+        <div class="stack-list-heading"><span>STACK ORDER</span><span id="stack-count">0 BLOCKS</span></div>
+        <ol id="stack-list" class="stack-list" aria-label="Added command blocks"></ol>
+      </div>
+    </section>
+
+    <section class="panel output-panel" aria-labelledby="output-title">
+      <div class="panel-heading output-heading">
+        <div>
+          <span class="eyebrow">GENERATED JAVA COMMAND</span>
+          <h2 id="output-title">Output</h2>
+        </div>
+      </div>
+      <textarea id="output_text" class="output-code" rows="20" readonly spellcheck="false" aria-label="Generated summon command" placeholder="Output generates here…"></textarea>
+      <div class="output-footer">
+        <p id="output-status" class="output-status" aria-live="polite">Add a command to preview your stack.</p>
+        <button class="button button-copy" id="copy-output" type="button" disabled>Copy output</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="social-footer" aria-label="Community links">
+    <a class="social-link" href="https://discord.gg/x5nktvPPAh" target="_blank" rel="noopener noreferrer">
+      <img src="./assets/discord.svg" alt="" aria-hidden="true">
+      <span>Join Discord</span>
+    </a>
+    <a class="social-link" href="https://youtube.com/@mekocqc?si=2ca605-yRXysZ8d2" target="_blank" rel="noopener noreferrer">
+      <img src="./assets/youtube.svg" alt="" aria-hidden="true">
+      <span>YouTube Channel</span>
+    </a>
+    <a class="social-link" href="https://www.patreon.com/16683975/join" target="_blank" rel="noopener noreferrer">
+      <img src="./assets/patreon.svg" alt="" aria-hidden="true">
+      <span>Support on Patreon</span>
+    </a>
+  </footer>
+</body>
+</html>
